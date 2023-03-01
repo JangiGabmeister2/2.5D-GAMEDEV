@@ -4,38 +4,49 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Transform orientation;
-    [SerializeField] Rigidbody body;
+    public CharacterController _charC;
+    Vector3 direction;
+    public float speed = 8;
+    public float rotateSpeed = 1000;
 
-    Vector3 _moveDirection;
+    private Vector3 _currentRotation;
+    private Vector3 _nextRotation;
+    private Vector3 _prevRotation;
 
-    float _horizontalInput;
-    float _verticalInput;
+    private Vector3 _rotationChange;
 
     private void Start()
     {
-        body = GetComponent<Rigidbody>();
-        body.freezeRotation = true;
+        _rotationChange = new Vector3(0, 90, 0);
+
+        _currentRotation = transform.eulerAngles;
+        _nextRotation = _currentRotation += _rotationChange;
+        _prevRotation = _currentRotation -= _rotationChange;
     }
 
     private void Update()
     {
-        MoveInputs();    
-    }
+        float _horizontalInput = Input.GetAxisRaw("Horizontal");
+        float _verticalInput = Input.GetAxis("Vertical");
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
+        direction.x = _horizontalInput * speed;
 
-    private void MoveInputs()
-    {
-        _horizontalInput = Input.GetAxisRaw("Horizontal");
-        _verticalInput = Input.GetAxisRaw("Vertical");
-    }
+        _charC.Move(direction * Time.deltaTime);
 
-    private void MovePlayer()
-    {
-
+        if (_verticalInput > 0)
+        {
+            while (_currentRotation != _nextRotation)
+            {
+                transform.Rotate(_currentRotation * 90 * rotateSpeed * Time.deltaTime, Space.Self);
+            }
+        }
+        else if (_verticalInput < 0)
+        {
+            while (_currentRotation != _prevRotation)
+            {
+                transform.Rotate(_currentRotation * -90 * rotateSpeed * Time.deltaTime, Space.Self);
+            }
+        }
     }
 }
+
