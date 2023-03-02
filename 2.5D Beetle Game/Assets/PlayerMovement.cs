@@ -4,49 +4,52 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController _charC;
-    Vector3 direction;
-    public float speed = 8;
-    public float rotateSpeed = 1000;
+    [Header("References")]
+    public CharacterController controller;
+    public Transform orientation;
+    public Transform playerCapsule;
+    public Transform player;
 
-    private Vector3 _currentRotation;
-    private Vector3 _nextRotation;
-    private Vector3 _prevRotation;
+    [Header("Movement Speeds")]
+    public float movementSpeed = 10f;
+    public float jumpSpeed = 5f;
+    public float gravity = 10f;
+    public float rotationSpeed;
 
-    private Vector3 _rotationChange;
+    Vector3 _movementDirection;
+    Vector3 _rotationChange;
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         _rotationChange = new Vector3(0, 90, 0);
-
-        _currentRotation = transform.eulerAngles;
-        _nextRotation = _currentRotation += _rotationChange;
-        _prevRotation = _currentRotation -= _rotationChange;
     }
 
     private void Update()
     {
-        float _horizontalInput = Input.GetAxisRaw("Horizontal");
-        float _verticalInput = Input.GetAxis("Vertical");
-
-        direction.x = _horizontalInput * speed;
-
-        _charC.Move(direction * Time.deltaTime);
-
-        if (_verticalInput > 0)
+        if (controller.isGrounded)
         {
-            while (_currentRotation != _nextRotation)
+            float horizontaInput = Input.GetAxis("Horizontal");
+
+            _movementDirection = transform.TransformDirection(new Vector3(horizontaInput, 0, 0)) * movementSpeed;
+
+            if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0)
             {
-                transform.Rotate(_currentRotation * 90 * rotateSpeed * Time.deltaTime, Space.Self);
+                player.Rotate(_rotationChange);
+            }
+            else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") < 0)
+            {
+                player.Rotate(-_rotationChange);
+            }
+
+            if (Input.GetButton("Jump"))
+            {
+                _movementDirection.y = jumpSpeed;
             }
         }
-        else if (_verticalInput < 0)
-        {
-            while (_currentRotation != _prevRotation)
-            {
-                transform.Rotate(_currentRotation * -90 * rotateSpeed * Time.deltaTime, Space.Self);
-            }
-        }
+
+        _movementDirection.y -= gravity * Time.deltaTime;
+        controller.Move(_movementDirection * Time.deltaTime);
     }
 }
 
