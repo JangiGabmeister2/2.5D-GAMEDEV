@@ -1,5 +1,5 @@
 # 2.5D-GAMEDEV
-2.5 Game Development Assignment
+2.5D Game Development Assignment
 
 This is a Unity project created and maintained by TAFE game artists and programmers.
 
