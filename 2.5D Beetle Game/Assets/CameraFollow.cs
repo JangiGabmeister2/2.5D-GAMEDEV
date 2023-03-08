@@ -13,12 +13,15 @@ public class CameraFollow : MonoBehaviour
     //distance between camera and target
     Vector3 _distance;
 
+    Vector3 _cameraPosition;
+    Vector3 _rightPosition;
+
     private void Start()
     {
         _distance = transform.position - target.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         MoveCamera();
     }

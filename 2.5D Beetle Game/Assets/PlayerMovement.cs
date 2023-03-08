@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     float _playerHeight;
-    public Transform playerCapsule;
 
     [Header("Movement Speeds")]
     public float movementSpeed = 10f;
@@ -31,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         MovePlayer();
-        //SurfaceAlignment();
     }
 
     private void MovePlayer()
@@ -64,23 +62,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, _playerHeight, groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.1f, groundLayer))
         {
             return true;
         }
 
         return false;
-    }
-
-    private void SurfaceAlignment()
-    {
-        Ray ray = new Ray(playerCapsule.position, -transform.up);
-        RaycastHit info = new RaycastHit();
-
-        if (Physics.Raycast(ray, out info, groundLayer))
-        {
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, info.normal);
-        }
     }
 }
 
