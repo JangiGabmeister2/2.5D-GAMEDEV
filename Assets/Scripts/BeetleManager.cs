@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BeetleManager : MonoBehaviour
 {
-    public int beetleHealth;
+    public int beetleHealth = 3;
     public int beetleGauge;
     public Text goalDistanceText;
     public GameObject goal;
@@ -17,6 +17,15 @@ public class BeetleManager : MonoBehaviour
     {
         float distance = Vector3.Distance(goal.transform.position, transform.position);
         goalDistanceText.text = (int)distance + " m";
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("hit");
+        }
+
     }
 
     public void Update()
