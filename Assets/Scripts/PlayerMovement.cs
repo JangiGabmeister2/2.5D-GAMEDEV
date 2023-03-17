@@ -12,12 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     float _jumpDuration;
-<<<<<<< Updated upstream
     float _flightDuration = 5f;
     [Tooltip("Input text game object which shows how long the player has left before becoming unable to continue flying.")]
-=======
-    public float _flightDuration = 5f;
->>>>>>> Stashed changes
     public Text flightTimeText;
 
     [Header("Movement Speeds")]
@@ -46,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _flyingEvent.AddListener(FlyMovement);
-        
+
         if (_landedEvent == null)
         {
             _landedEvent = new UnityEvent();
@@ -67,17 +63,11 @@ public class PlayerMovement : MonoBehaviour
         //if player is touching the ground
         if (IsGrounded())
         {
-<<<<<<< Updated upstream
             //resets duration of jump and flight to 0 and 5 respectively
             _jumpDuration = 0;
             _flightDuration = 5;
 
             //gets float value when player presses left or right buttons
-=======
-            _jumpDuration = 0;
-            _flightDuration = 5;
-
->>>>>>> Stashed changes
             float horizontaInput = Input.GetAxis("Horizontal");
 
             //sets the direction of player movement according to above float value on the x-axis * movement speed
@@ -100,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
                 _movementDirection.y = jumpSpeed;
             }
         }
-<<<<<<< Updated upstream
         //if player is not touching the ground
         else
         {
@@ -109,21 +98,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 //counts how long the jump has elapsed
                 _jumpDuration += Time.deltaTime;
-                
+
                 //checks if the time elapsed is equal to or over 1 second.
                 if (_jumpDuration >= 1f)
                 {
                     //invokes event to signal flying movement
-=======
-        else
-        {
-            if (Input.GetButton("Jump"))
-            {
-                _jumpDuration += Time.deltaTime;
-                
-                if (!IsGrounded() && _jumpDuration >= 1f)
-                {
->>>>>>> Stashed changes
                     _flyingEvent.Invoke();
                 }
             }
@@ -138,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void FlyMovement()
     {
-<<<<<<< Updated upstream
         //while in fly mode,
         //sets vertical movement force to 0
         _movementDirection.y = 0;
@@ -147,23 +125,12 @@ public class PlayerMovement : MonoBehaviour
         _flightDuration -= Time.deltaTime;
         //sets the amount of seconds remaining to GUI text
         flightTimeText.text = $"Flight Time: {_flightDuration:00.0}";
-        
-        //below code is exactly how the plyer moves as if grounded
-=======
-        _movementDirection.y = 0;
 
-        _flightDuration -= Time.deltaTime;
-        flightTimeText.text = $"Flight Time: {_flightDuration:00.0}";
-        
->>>>>>> Stashed changes
         float horizontaInput = Input.GetAxis("Horizontal");
 
         _movementDirection = transform.TransformDirection(new Vector3(horizontaInput, 0, 0)) * movementSpeed;
 
-<<<<<<< Updated upstream
-=======
         //if player presses forward button, rotates player model 45 degrees to the left
->>>>>>> Stashed changes
         if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0)
         {
             transform.Rotate(-_rotationChange);
@@ -183,23 +150,15 @@ public class PlayerMovement : MonoBehaviour
             _movementDirection.y -= 5;
         }
 
-<<<<<<< Updated upstream
         //if the player is still not grounded and flight duration has exceeded it's limit
         if (!IsGrounded() && _flightDuration <= 0)
         {
             //forces the player down to the ground by increasing gravity force by 100, hopefully to the ground
-=======
-        if (!IsGrounded() && _flightDuration <= 0)
-        {
->>>>>>> Stashed changes
             _movementDirection.y -= gravity * 100f;
         }
     }
 
-<<<<<<< Updated upstream
     //checks if player is grounded, returns bool value depending on result
-=======
->>>>>>> Stashed changes
     private bool IsGrounded()
     {
         //sends a raycast downwards from the player's position, and checks that, if directly below the player is the ground...
