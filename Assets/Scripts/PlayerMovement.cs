@@ -60,6 +60,54 @@ public class PlayerMovement : MonoBehaviour
         _charC.Move(_movementDirection * Time.deltaTime);
     }
 
+<<<<<<< Updated upstream
+=======
+    public void FlyMovement()
+    {
+        //while in fly mode,
+        //sets vertical movement force to 0
+        _movementDirection.y = 0;
+
+        //decreases the time in which the player can continue flying 
+        _flightDuration -= Time.deltaTime;
+        //sets the amount of seconds remaining to GUI text
+        flightTimeText.text = $"Flight Time: {_flightDuration:00.0}";
+
+        float horizontaInput = Input.GetAxis("Horizontal");
+
+        _movementDirection = transform.TransformDirection(new Vector3(horizontaInput, 0, 0)) * movementSpeed;
+
+        //if player presses forward button, rotates player model 45 degrees to the left
+        if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0)
+        {
+            transform.Rotate(-_rotationChange);
+        }
+        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") < 0)
+        {
+            transform.Rotate(_rotationChange);
+        }
+
+        //pressing Q will levitate player upwards, while pressing E does opposite
+        if (Input.GetKey(KeyCode.Q))
+        {
+            _movementDirection.y += 5;
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            _movementDirection.y -= 5;
+        }
+
+        //if the player is still not grounded and flight duration has exceeded it's limit
+        if (!IsGrounded() && _flightDuration <= 0)
+        {
+            //forces the player down to the ground
+            _movementDirection.y -= 10f;
+            _flightDuration = 0f;
+        }
+    }
+
+    //checks if player is grounded, returns bool value depending on result
+>>>>>>> Stashed changes
     private bool IsGrounded()
     {
         if (Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.1f, groundLayer))
