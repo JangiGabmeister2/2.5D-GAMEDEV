@@ -7745,8 +7745,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528655945}
-  m_LocalRotation: {x: 0.09853762, y: -0.000000004280661, z: 4.238689e-10, w: 0.99513334}
-  m_LocalPosition: {x: 4.88, y: 13.65, z: -52.55}
+  m_LocalRotation: {x: 0.098537624, y: -0.000000004321195, z: 4.2788265e-10, w: 0.99513334}
+  m_LocalPosition: {x: -8.7, y: 2.244, z: -25.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13426,8 +13426,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.09853762, y: -0.000000004280661, z: 4.238689e-10, w: 0.99513334}
-  m_LocalPosition: {x: 4.88, y: 13.65, z: -52.55}
+  m_LocalRotation: {x: 0.098537624, y: -0.000000004321195, z: 4.2788265e-10, w: 0.99513334}
+  m_LocalPosition: {x: -8.7, y: 2.244, z: -25.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22675,6 +22675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flightTimeText: {fileID: 0}
+  canFly: 1
   movementSpeed: 10
   jumpSpeed: 5
   groundLayer:
@@ -22688,7 +22689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582947006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.88, y: 12.65, z: -47.55}
+  m_LocalPosition: {x: -8.7, y: 1.244, z: -20.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
